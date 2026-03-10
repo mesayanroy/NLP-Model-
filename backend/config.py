@@ -21,7 +21,7 @@ class Settings(BaseSettings):
     openai_api_key: str = ""
 
     # Gmail
-    email_address: str = "rsayan570@gmail.com"
+    email_address: str = "your_email@gmail.com"
     google_credentials_file: str = "credentials.json"
 
     # Server
@@ -29,7 +29,7 @@ class Settings(BaseSettings):
     port: int = 8000
 
     # App
-    secret_key: str = "change-me"
+    secret_key: str = ""
     debug: bool = True
 
 
