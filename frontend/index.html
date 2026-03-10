@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NLP Email Assistant</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+<!-- ── Sidebar ───────────────────────────────────────────────────────────── -->
+<aside class="sidebar">
+  <div class="brand">
+    <span class="brand-icon">✉️</span>
+    <span class="brand-name">Email AI</span>
+  </div>
+  <nav>
+    <button class="nav-btn active" data-panel="chat">💬 Chat</button>
+    <button class="nav-btn" data-panel="inbox">📥 Inbox</button>
+    <button class="nav-btn" data-panel="compose">✏️ Compose</button>
+  </nav>
+  <div class="sidebar-footer">
+    <span id="status-dot" class="status-dot offline"></span>
+    <span id="status-label">Offline</span>
+  </div>
+</aside>
+
+<!-- ── Main ──────────────────────────────────────────────────────────────── -->
+<main class="main">
+
+  <!-- ── Chat panel ─────────────────────────────────────────────────────── -->
+  <section id="panel-chat" class="panel active">
+    <header class="panel-header">
+      <h1>Chat with your Email Assistant</h1>
+      <button id="btn-reset" class="icon-btn" title="Reset conversation">🔄</button>
+    </header>
+
+    <div id="chat-messages" class="chat-messages" aria-live="polite">
+      <div class="msg assistant">
+        <span class="bubble">
+          👋 Hi! I'm your NLP Email Assistant.<br/>
+          Try: <em>"Write an email to Alice about the project"</em>
+        </span>
+      </div>
+    </div>
+
+    <form id="chat-form" class="chat-input-row" autocomplete="off">
+      <button type="button" id="btn-voice" class="icon-btn voice-btn" title="Voice input">🎤</button>
+      <input id="chat-input" type="text" placeholder="Type your request…" aria-label="Chat input" />
+      <button type="submit" class="send-btn">Send ➤</button>
+    </form>
+  </section>
+
+  <!-- ── Inbox panel ────────────────────────────────────────────────────── -->
+  <section id="panel-inbox" class="panel">
+    <header class="panel-header">
+      <h1>Inbox</h1>
+      <div class="inbox-controls">
+        <input id="inbox-search" type="text" placeholder="Search emails…" />
+        <button id="btn-refresh" class="icon-btn" title="Refresh">↻</button>
+      </div>
+    </header>
+    <div id="inbox-list" class="inbox-list">
+      <p class="placeholder">Click ↻ to load your inbox.</p>
+    </div>
+  </section>
+
+  <!-- ── Compose panel ──────────────────────────────────────────────────── -->
+  <section id="panel-compose" class="panel">
+    <header class="panel-header">
+      <h1>Compose Email</h1>
+    </header>
+    <form id="compose-form" class="compose-form">
+      <label>
+        To
+        <input id="compose-to" type="email" placeholder="recipient@example.com" required />
+      </label>
+      <label>
+        Subject
+        <input id="compose-subject" type="text" placeholder="Subject line" required />
+      </label>
+      <label>
+        Describe what you want to say (AI will draft it)
+        <input id="compose-desc" type="text" placeholder="e.g. 'Schedule a meeting for next Tuesday'" />
+      </label>
+      <label>
+        Body
+        <textarea id="compose-body" rows="8" placeholder="Email body (AI-drafted or type directly)"></textarea>
+      </label>
+
+      <div id="compose-ai-status" class="ai-status hidden">✨ Generating with AI…</div>
+
+      <div class="compose-actions">
+        <button type="button" id="btn-ai-draft" class="secondary-btn">✨ AI Draft</button>
+        <button type="button" id="btn-save-draft" class="secondary-btn">💾 Save Draft</button>
+        <button type="submit" class="send-btn">Send ➤</button>
+      </div>
+    </form>
+    <div id="compose-result" class="result-msg hidden"></div>
+  </section>
+
+</main>
+
+<!-- ── Email Detail Modal ─────────────────────────────────────────────────── -->
+<div id="email-modal" class="modal hidden" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <button class="modal-close" id="modal-close" title="Close">✕</button>
+    <h2 id="modal-subject" class="modal-subject">Subject</h2>
+    <p id="modal-from" class="modal-meta"></p>
+    <p id="modal-date" class="modal-meta"></p>
+    <hr/>
+    <pre id="modal-body" class="modal-body"></pre>
+    <div class="modal-actions">
+      <button id="btn-modal-reply" class="secondary-btn">↩️ Reply</button>
+      <button id="btn-modal-forward" class="secondary-btn">➡️ Forward</button>
+      <button id="btn-modal-delete" class="danger-btn">🗑️ Delete</button>
+    </div>
+  </div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
